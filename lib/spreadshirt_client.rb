@@ -49,7 +49,9 @@ module SpreadshirtClient
     def headers_for(method_symbol, path, options)
       headers = {}
 
-      headers[:authorization] = authorize(method_for(method_symbol), path, options[:session]) if options[:authorization]
+      # The following line was changed to remove a trailing: if options[:authorization]
+      # In other words, authorization headers are now always added to the request
+      headers[:authorization] = authorize(method_for(method_symbol), path, options[:session])
 
       opts = options.dup
       opts.delete :session
