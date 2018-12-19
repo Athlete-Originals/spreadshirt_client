@@ -56,6 +56,11 @@ module SpreadshirtClient
       opts = options.dup
       opts.delete :session
 
+      # Will this work properly for passing in the user agent? Looks like yes based on:
+      # https://github.com/rest-client/rest-client/blob/f450a0f086f1cd1049abbef2a2c66166a1a9ba71/spec/unit/request_spec.rb#L623
+      # TODO: move this back to the AthleteOriginals app when things are working again
+      opts[:user_agent] ||= "Athlete-Originals/2.0 (http://www.athleteoriginals.com; support@athleteoriginals.com)"
+
       opts[:content_type] ||= "application/xml"
 
       opts.merge headers
@@ -82,4 +87,3 @@ module SpreadshirtClient
     end
   end
 end
-
